@@ -1,0 +1,25 @@
+{
+  "name": "southside-infoviz",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ohanhi/southside-infoviz",
+  "authors": [
+    "Futurice"
+  ],
+  "main": "index.html",
+  "keywords": [
+    "infoviz",
+    "polymer",
+    "webcomponents"
+  ],
+  "license": "BSD (3-clause)",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.5.5"
+  }
+}
