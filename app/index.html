@@ -17,6 +17,7 @@
   <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
   <!-- endbuild -->
 
+  <link rel="import" href="bower_components/core-ajax/core-ajax.html">
   <!-- will be replaced with /elements/elements.vulcanized.html -->
   <link rel="import" href="/elements/elements.html">
   <!-- endreplace-->
@@ -27,9 +28,15 @@
     <!-- Main Content -->
     <img class="hero" src="images/hero.png" alt="">
     <section class="page">
-      <viz-kpis></viz-kpis>
-      <viz-financials></viz-financials>
+      <viz-kpis summary="{{ response.summary }}"></viz-kpis>
+      <viz-financials customers="{{ response.customers }}"></viz-financials>
     </section>
+
+    <core-ajax
+      auto
+      url="{{ jsonUrl }}"
+      handleAs="json"
+      response="{{ response }}"></core-ajax>
   </template>
 
   <!-- build:js /scripts/app.js -->

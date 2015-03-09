@@ -1,15 +1,22 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="viz-kpis" attributes="">
+<polymer-element name="viz-kpis" attributes="summary">
   <template>
     <link rel="stylesheet" href="viz-kpis.css">
     <h1>Key Performance Indicators</h1>
-    <p>Sweet numbers here.</p>
+    <p>FTE: {{ summary.fte_this_month | toFixed(1) }}<br>
+    Value Creation: {{ summary.value_creation / 1000 | toFixed(1) }} k&euro;<br>
+    Value Creation this month: {{ summary.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</p>
   </template>
   <script>
     (function () {
       Polymer({
-        // define element prototype here
+        /**
+         * Filter for bringing numbers to a defined precision.
+         */
+        toFixed: function(value, precision) {
+          return Number(value).toFixed(precision);
+        }
       });
     })();
   </script>
