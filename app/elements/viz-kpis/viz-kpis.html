@@ -3,10 +3,20 @@
 <polymer-element name="viz-kpis" attributes="summary">
   <template>
     <link rel="stylesheet" href="viz-kpis.css">
-    <h1>Key Performance Indicators</h1>
-    <p>FTE: {{ summary.fte_this_month | toFixed(1) }}<br>
-    Value Creation: {{ summary.value_creation / 1000 | toFixed(1) }} k&euro;<br>
-    Value Creation this month: {{ summary.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</p>
+    <div class="kpi-numbers" layout horizontal>
+      <div flex title="Estimated profit divided by revenue">
+        <span class="number">{{ summary.ebit_margin*100 | toFixed(1) }} %</span>
+        <span class="description">EBIT</span>
+      </div>
+      <div flex title="Number of persons working for tribe this month, converted to full time employees.">
+        <span class="number">{{ summary.fte_this_month | toFixed(1) }}</span>
+        <span class="description">FTE</span>
+      </div>
+      <div flex title="Estimated revenue for this month.">
+        <span class="number">{{ summary.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</span>
+        <span class="description">Value Creation this month</span>
+      </div>
+    </div>
   </template>
   <script>
     (function () {

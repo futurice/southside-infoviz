@@ -1,3 +1,21 @@
 :host {
   display: block;
 }
+
+.kpi-numbers {
+  text-align: center;
+}
+
+.number,
+.description {
+  padding: 0 0.5em;
+}
+
+.number {
+  font-size: 2em;
+  font-weight: 600;
+  display: block;
+}
+.description {
+  font-size: 0.75em;
+}
