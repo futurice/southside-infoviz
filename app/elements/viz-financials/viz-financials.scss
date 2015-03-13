@@ -1,3 +1,69 @@
 :host {
   display: block;
 }
+
+$LABELS_ALWAYS_SHOWN: 3;
+$SERIES_COUNT: 10;
+
+$LETTERS: a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z;
+
+$chartColors:
+  rgb(50,158,65),
+  rgb(70,40,154),
+  rgb(255,240,70),
+  rgb(255,82,64),
+  rgb(205,236,228),
+  rgb(0,90,75),
+  rgb(0,52,65),
+  rgb(126,135,139);
+
+@mixin seriesObjects($color) {
+  .ct-bar,
+  .ct-line,
+  .ct-point,
+  .ct-slice.ct-donut {
+    stroke: $color;
+  }
+}
+
+.ct-chart {
+
+  .ct-label {
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0;
+    color: rgba(0,0,0, 0.8);
+    fill: rgba(0,0,0, 0.8);
+    text-shadow: 0 0 4px white;
+    transition: opacity 0.2s ease;
+  }
+
+  .ct-series {
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+  }
+
+  .ct-series:hover {
+    opacity: 1;
+    .ct-label {
+      opacity: 1;
+    }
+  }
+
+  .ct-series {
+    @for $i from 1 through $SERIES_COUNT {
+      &.ct-series-#{nth($LETTERS, $i)} {
+        @include seriesObjects( nth($chartColors, ($i - 1)%length($chartColors) + 1) );
+
+        // always show the top X customers' labels
+        @if $i <= $LABELS_ALWAYS_SHOWN {
+          .ct-label {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+}
+
+
