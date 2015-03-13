@@ -2,7 +2,7 @@
   display: block;
 }
 
-$LABELS_ALWAYS_SHOWN: 3;
+$LABELS_ALWAYS_SHOWN: 5;
 $SERIES_COUNT: 10;
 
 $LETTERS: a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z;
@@ -29,7 +29,7 @@ $chartColors:
 .ct-chart {
 
   .ct-label {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1rem;
     opacity: 0;
     color: rgba(0,0,0, 0.8);
@@ -46,7 +46,7 @@ $chartColors:
   .ct-series:hover {
     opacity: 1;
     .ct-label {
-      opacity: 1;
+      opacity: 1 !important;
     }
   }
 
@@ -58,7 +58,7 @@ $chartColors:
         // always show the top X customers' labels
         @if $i <= $LABELS_ALWAYS_SHOWN {
           .ct-label {
-            opacity: 0.7;
+            opacity: (1 / $i) - 0.1;
           }
         }
       }
