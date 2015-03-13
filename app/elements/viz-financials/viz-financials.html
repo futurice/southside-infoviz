@@ -27,6 +27,8 @@
   </template>
   <script src="../../bower_components/chartist/dist/chartist.js"></script>
   <script>
+    /* jshint camelcase: false */
+    /* global Chartist */
     (function () {
       Polymer({
         customersChanged: function(oldValue, newValue) {
@@ -85,7 +87,7 @@
             // }
           };
 
-          var chart = new Chartist.Pie(chartEl, data, opts);
+          new Chartist.Pie(chartEl, data, opts);
         }
       });
     })();
