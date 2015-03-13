@@ -1,7 +1,6 @@
 node_modules
 bower_components
 dist
-app/mock
 test/temp
 .sass-cache
 app/bower_components
