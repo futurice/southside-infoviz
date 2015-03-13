@@ -1,0 +1,95 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<polymer-element name="viz-financials" attributes="customers">
+  <template>
+    <link rel="stylesheet" href="../../bower_components/chartist/dist/chartist.min.css">
+    <link rel="stylesheet" href="viz-financials.css">
+    <h1>Financials</h1>
+
+    <div id="pieChart" class="ct-chart ct-perfect-fourth"></div>
+
+    <ul>
+      <template repeat="{{ c in customers }}">
+        <li>
+          <h2>{{ c.name }}</h2>
+          <p>FTE: {{ c.summary.fte_this_month | toFixed(1) }}<br>
+          Value Creation: {{ c.summary.value_creation / 1000 | toFixed(1) }} k&euro;<br>
+          Value Creation this month: {{ c.summary.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</p>
+
+          <ul>
+            <template repeat="{{ p in c.projects }}">
+              <li>{{ p.name }}: {{ p.value_creation / 1000 | toFixed(1) }} k&euro;</li>
+            </template>
+          </ul>
+        </li>
+      </template>
+    </ul>
+  </template>
+  <script src="../../bower_components/chartist/dist/chartist.js"></script>
+  <script>
+    /* jshint camelcase: false */
+    /* global Chartist */
+    (function () {
+      Polymer({
+        customersChanged: function(oldValue, newValue) {
+          if (newValue) {
+
+            // sort customers
+            var sorted = newValue.sort(function(a, b) {
+              return a.summary.value_creation < b.summary.value_creation;
+            });
+
+            // sort projects within customers
+            sorted.forEach(function(c) {
+              c.projects.sort(function(a, b) {
+                return a.value_creation < b.value_creation;
+              });
+            });
+
+            this.customers = sorted;
+            this.drawChart(sorted);
+          }
+        },
+        /**
+         * Filter for bringing numbers to a defined precision.
+         */
+        toFixed: function(value, precision) {
+          return Number(value).toFixed(precision);
+        },
+
+        /**
+         * Draws a graph using the Chartist library
+         */
+        drawChart: function(customers) {
+          var chartEl = this.$.pieChart;
+
+          var labels = customers.map(function(c) {
+            return c.name;
+          });
+
+          var series = customers.map(function(c) {
+            return c.summary.value_creation;
+          });
+
+          var data = {
+            labels: labels,
+            series: series
+          };
+
+          var opts = {
+            donut: true,
+            donutWidth: 50,
+            chartPadding: 65,
+            labelOffset: 45,
+            labelDirection: 'explode',
+            // labelInterpolationFnc: function(value) {
+            //   return value;
+            // }
+          };
+
+          new Chartist.Pie(chartEl, data, opts);
+        }
+      });
+    })();
+  </script>
+</polymer-element>
