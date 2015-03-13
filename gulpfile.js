@@ -64,11 +64,14 @@ gulp.task('copy', function () {
   var elements = gulp.src(['app/elements/**/*.html'])
     .pipe(gulp.dest('dist/elements'));
 
+  var mock = gulp.src(['app/mock/**/*.json'])
+    .pipe(gulp.dest('dist/mock'));
+
   var vulcanized = gulp.src(['app/elements/elements.html'])
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, vulcanized).pipe($.size({title: 'copy'}));
+  return merge(app, bower, elements, mock, vulcanized).pipe($.size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
