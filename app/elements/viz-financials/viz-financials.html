@@ -4,9 +4,11 @@
   <template>
     <link rel="stylesheet" href="../../bower_components/chartist/dist/chartist.min.css">
     <link rel="stylesheet" href="viz-financials.css">
-    <h1>Financials</h1>
 
-    <div id="pieChart" class="ct-chart ct-perfect-fourth"></div>
+    <h1>Accounts</h1>
+    <div id="pieChart" class="ct-chart ct-perfect-fourth">
+      <h2 class="chart-title">Value Creation this month</h2>
+    </div>
 
     <ul>
       <template repeat="{{ c in customers }}">
@@ -36,13 +38,13 @@
 
             // sort customers
             var sorted = newValue.sort(function(a, b) {
-              return a.summary.value_creation < b.summary.value_creation;
+              return a.summary.value_creation_this_month < b.summary.value_creation_this_month;
             });
 
             // sort projects within customers
             sorted.forEach(function(c) {
               c.projects.sort(function(a, b) {
-                return a.value_creation < b.value_creation;
+                return a.value_creation_this_month < b.value_creation_this_month;
               });
             });
 
@@ -68,7 +70,7 @@
           });
 
           var series = customers.map(function(c) {
-            return c.summary.value_creation;
+            return c.summary.value_creation_this_month;
           });
 
           var data = {
