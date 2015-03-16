@@ -1,6 +1,7 @@
 node_modules
 bower_components
 test/temp
+dist
 .sass-cache
 .divshot-cache
 app/bower_components
