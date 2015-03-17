@@ -1,0 +1,58 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<polymer-element name="summary-view" attributes="data">
+  <template>
+    <style>
+      :host {
+        display: block;
+        text-align: center;
+      }
+      .number,
+      .description {
+        display: block;
+        padding: 0 0.5em;
+      }
+      .description {
+        font-size: 0.75em;
+      }
+      .highlight-positive {
+        color: rgb(50,158,65);
+      }
+      .highlight-negative {
+        color: rgb(255,82,64);
+      }
+    </style>
+    <div layout horizontal>
+      <div flex title="Estimated revenue">
+        <span class="number">{{ data.value_creation / 1000 | toFixed(1) }} k&euro;</span>
+        <span class="description">VC</span>
+      </div>
+      <div flex title="Estimated revenue for this month.">
+        <span class="number">{{ data.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</span>
+        <span class="description">VC (month)</span>
+      </div>
+      <div flex title="Estimated profit divided by revenue">
+        <span class="number {{ { 'highlight-negative': data.ebit_margin < 0.05,'highlight-positive': data.ebit_margin >= 0.15 } | tokenList }}">
+          {{ data.ebit_margin*100 | toFixed(1) }} %
+        </span>
+        <span class="description">EBIT</span>
+      </div>
+      <div flex title="Number of persons working for project this month, converted to full time employees.">
+        <span class="number">{{ data.fte_this_month | toFixed(1) }}</span>
+        <span class="description">FTE</span>
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        /**
+         * Filter for bringing numbers to a defined precision.
+         */
+        toFixed: function(value, precision) {
+          return Number(value).toFixed(precision);
+        }
+      });
+    })();
+  </script>
+</polymer-element>

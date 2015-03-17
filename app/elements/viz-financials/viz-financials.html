@@ -5,24 +5,21 @@
     <link rel="stylesheet" href="../../bower_components/chartist/dist/chartist.min.css">
     <link rel="stylesheet" href="viz-financials.css">
 
+    <core-localstorage
+      name="accounts-opened"
+      value="{{ accountsOpened }}"></core-localstorage>
+
     <h1>Accounts</h1>
     <div id="pieChart" class="ct-chart ct-perfect-fourth">
       <h2 class="chart-title">Value Creation this month</h2>
     </div>
 
-    <ul>
-      <template repeat="{{ c in customers }}">
+    <ul class="accounts-list">
+      <template repeat="{{ c, i in customers }}">
         <li>
-          <h2>{{ c.name }}</h2>
-          <p>FTE: {{ c.summary.fte_this_month | toFixed(1) }}<br>
-          Value Creation: {{ c.summary.value_creation / 1000 | toFixed(1) }} k&euro;<br>
-          Value Creation this month: {{ c.summary.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</p>
-
-          <ul>
-            <template repeat="{{ p in c.projects }}">
-              <li>{{ p.name }}: {{ p.value_creation / 1000 | toFixed(1) }} k&euro;</li>
-            </template>
-          </ul>
+          <h2 flex>{{ c.name }}</h2>
+          <summary-view data="{{ c.summary }}"></summary-view>
+          <project-collapse projects="{{ c.projects }}"></project-collapse>
         </li>
       </template>
     </ul>
@@ -33,6 +30,8 @@
     /* global Chartist */
     (function () {
       Polymer({
+        accountsOpened: [],
+
         customersChanged: function(oldValue, newValue) {
           if (newValue) {
 
@@ -51,12 +50,6 @@
             this.customers = sorted;
             this.drawChart(sorted);
           }
-        },
-        /**
-         * Filter for bringing numbers to a defined precision.
-         */
-        toFixed: function(value, precision) {
-          return Number(value).toFixed(precision);
         },
 
         /**

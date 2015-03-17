@@ -1,0 +1,33 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<polymer-element name="project-collapse" attributes="projects">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      h3 {
+        font-size: 1.2em;
+        margin: 0;
+      }
+    </style>
+    <button on-tap="{{ toggle }}">Projects</button>
+    <core-collapse id="collapse">
+      <div>
+        <template repeat="{{ p in projects }}">
+          <h3>{{ p.name }}</h3>
+          <summary-view data="{{ p }}"></summary-view>
+        </template>
+      </div>
+    </core-collapse>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        toggle: function() {
+          this.$.collapse.toggle();
+        }
+      });
+    })();
+  </script>
+</polymer-element>
