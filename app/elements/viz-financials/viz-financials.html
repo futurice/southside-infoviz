@@ -17,8 +17,7 @@
     <ul class="accounts-list">
       <template repeat="{{ c, i in customers }}">
         <li>
-          <h2 flex>{{ c.name }}</h2>
-          <summary-view data="{{ c.summary }}"></summary-view>
+          <summary-view name="{{ c.name }}" data="{{ c.summary }}" titleSize="large"></summary-view>
           <project-collapse projects="{{ c.projects }}"></project-collapse>
         </li>
       </template>
@@ -73,9 +72,9 @@
 
           var opts = {
             donut: true,
-            donutWidth: 50,
+            donutWidth: 10,
             chartPadding: 65,
-            labelOffset: 45,
+            labelOffset: 25,
             labelDirection: 'explode',
             // labelInterpolationFnc: function(value) {
             //   return value;

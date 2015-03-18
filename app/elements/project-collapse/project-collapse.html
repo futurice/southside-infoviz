@@ -2,23 +2,18 @@
 
 <polymer-element name="project-collapse" attributes="projects">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-      h3 {
-        font-size: 1.2em;
-        margin: 0;
-      }
-    </style>
-    <button on-tap="{{ toggle }}">Projects</button>
-    <core-collapse id="collapse">
-      <div>
-        <template repeat="{{ p in projects }}">
-          <h3>{{ p.name }}</h3>
+    <link rel="stylesheet" href="project-collapse.css">
+
+    <h3 class="collapse-title {{ {opened: opened} | tokenList }}" on-tap="{{ toggle }}">
+      Show projects
+      <core-icon icon="expand-more"></core-icon>
+    </h3>
+    <core-collapse id="collapse" opened="{{ opened }}">
+      <template repeat="{{ p in projects }}">
+        <div class="project">
           <summary-view data="{{ p }}"></summary-view>
-        </template>
-      </div>
+        </div>
+      </template>
     </core-collapse>
   </template>
   <script>

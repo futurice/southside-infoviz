@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid rgba(0,0,0, 0.08);
+}
+.collapse-title {
+  margin: 0;
+  float: right;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0 1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(70,40,154, 0.5);
+
+  &:hover,
+  &.opened {
+    color: rgb(70,40,154);
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+core-icon {
+  transition: transform 0.2s ease;
+  transform: rotate(360deg);
+}
+.opened core-icon {
+  transform: rotate(180deg);
+}
+core-collapse {
+  clear: both;
+  padding: 0.5em 0;
+}
+h4 {
+  margin: 0;
+}
+.project {
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid rgba(0,0,0, 0.05);
+
+  &:last-child {
+    border: none;
+  }
+}
+

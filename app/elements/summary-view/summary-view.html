@@ -1,14 +1,18 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="summary-view" attributes="data">
+<polymer-element name="summary-view" attributes="name data titleSize">
   <template>
     <style>
       :host {
         display: block;
-        text-align: center;
+      }
+      h2, h4 {
+        font-weight: 100;
+        margin: 0;
       }
       .number,
       .description {
+        text-align: center;
         display: block;
         padding: 0 0.5em;
       }
@@ -23,6 +27,12 @@
       }
     </style>
     <div layout horizontal>
+      <template if="{{ titleSize == 'large' }}">
+        <h2 flex>{{ name || data.name }}</h2>
+      </template>
+      <template if="{{ titleSize != 'large' }}">
+        <h4 flex>{{ name || data.name }}</h4>
+      </template>
       <div flex title="Estimated revenue">
         <span class="number">{{ data.value_creation / 1000 | toFixed(1) }} k&euro;</span>
         <span class="description">VC</span>
