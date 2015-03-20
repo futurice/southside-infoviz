@@ -4,6 +4,10 @@
   <template>
     <link rel="stylesheet" href="viz-kpis.css">
     <div class="kpi-numbers" layout horizontal>
+      <div flex title="Estimated future revenue.">
+        <span class="number">{{ summary.orderbook / 1000 | toFixed(0) }} k&euro;</span>
+        <span class="description">Orderbook</span>
+      </div>
       <div flex title="Estimated revenue for this month.">
         <span class="number">{{ summary.value_creation_this_month / 1000 | toFixed(0) }} k&euro;</span>
         <span class="description">Value Creation this month</span>

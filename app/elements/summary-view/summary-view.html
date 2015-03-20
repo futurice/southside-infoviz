@@ -33,9 +33,9 @@
       <template if="{{ titleSize != 'large' }}">
         <h4 flex>{{ name || data.name }}</h4>
       </template>
-      <div flex title="Estimated revenue">
-        <span class="number">{{ data.value_creation / 1000 | toFixed(1) }} k&euro;</span>
-        <span class="description">VC</span>
+      <div flex title="Estimated future revenue">
+        <span class="number">{{ data.orderbook / 1000 | toFixed(1) }} k&euro;</span>
+        <span class="description">Orderbook</span>
       </div>
       <div flex title="Estimated revenue for this month.">
         <span class="number">{{ data.value_creation_this_month / 1000 | toFixed(1) }} k&euro;</span>
