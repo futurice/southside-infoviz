@@ -42,10 +42,10 @@
         <span class="description">VC (month)</span>
       </div>
       <div flex title="Estimated profit divided by revenue">
-        <span class="number {{ { 'highlight-negative': data.ebit_margin < 0.05,'highlight-positive': data.ebit_margin >= 0.15 } | tokenList }}">
-          {{ data.ebit_margin*100 | toFixed(1) }} %
+        <span class="number {{ { 'highlight-negative': data.ebit_margin_this_month < 0.05,'highlight-positive': data.ebit_margin_this_month >= 0.15 } | tokenList }}">
+          {{ data.ebit_margin_this_month*100 | toFixed(1) }} %
         </span>
-        <span class="description">EBIT</span>
+        <span class="description">EBIT (month)</span>
       </div>
       <div flex title="Number of persons working for project this month, converted to full time employees.">
         <span class="number">{{ data.fte_this_month | toFixed(1) }}</span>

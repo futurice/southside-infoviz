@@ -1,4 +1,9 @@
 {
+  "date": {
+    "year": 2015,
+    "day": 1,
+    "month": 3
+  },
   "tribe": "Mock Tribe",
   "customers": [
     {
@@ -7,16 +12,18 @@
         {
           "customer": "Food Corp.",
           "name": "Food Corp.",
+          "orderbook": 367500.0,
+          "ebit_margin_this_month": 0.3636363636363637,
           "value_creation": 753000.0,
-          "ebit_margin": 0.3636363636363637,
           "fte_this_month": 9.863636363636363,
           "value_creation_this_month": 162750.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.3636363636363637,
+        "ebit_margin_this_month": 0.3636363636363637,
         "fte_this_month": 9.863636363636363,
         "value_creation_this_month": 162750.0,
+        "orderbook": 367500.0,
         "value_creation": 753000.0
       }
     },
@@ -26,24 +33,27 @@
         {
           "customer": "Narnia",
           "name": "Door Hinge maintenance",
+          "orderbook": 0.0,
+          "ebit_margin_this_month": 0.0,
           "value_creation": 79500.0,
-          "ebit_margin": 0.0,
           "fte_this_month": 0.0,
           "value_creation_this_month": 0.0
         },
         {
           "customer": "Narnia",
           "name": "Time-flow Control",
+          "orderbook": 249000.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 828000.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 4.0,
           "value_creation_this_month": 66000.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.36363636363636365,
+        "ebit_margin_this_month": 0.36363636363636365,
         "fte_this_month": 4.0,
         "value_creation_this_month": 66000.0,
+        "orderbook": 249000.0,
         "value_creation": 907500.0
       }
     },
@@ -53,32 +63,36 @@
         {
           "customer": "Matrix",
           "name": "Glitch patching",
+          "orderbook": 139500.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 179250.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 2.0,
           "value_creation_this_month": 33000.0
         },
         {
           "customer": "Matrix",
           "name": "Illusion re-instatement",
+          "orderbook": 0.0,
+          "ebit_margin_this_month": 0.0,
           "value_creation": 294000.0,
-          "ebit_margin": 0.0,
           "fte_this_month": 0.0,
           "value_creation_this_month": 0.0
         },
         {
           "customer": "Matrix",
           "name": "Power Supply Mgmt",
+          "orderbook": 81750.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 90000.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 2.1818181818181817,
           "value_creation_this_month": 36000.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.3636363636363637,
+        "ebit_margin_this_month": 0.3636363636363637,
         "fte_this_month": 4.181818181818182,
         "value_creation_this_month": 69000.0,
+        "orderbook": 221250.0,
         "value_creation": 563250.0
       }
     },
@@ -88,32 +102,36 @@
         {
           "customer": "Hitchhiker's Guide",
           "name": "Guide maintenance",
+          "orderbook": 15750.0,
+          "ebit_margin_this_month": 0.36363636363636354,
           "value_creation": 232500.0,
-          "ebit_margin": 0.36363636363636354,
           "fte_this_month": 0.9545454545454546,
           "value_creation_this_month": 15750.0
         },
         {
           "customer": "Hitchhiker's Guide",
           "name": "Hitchhiker's mobile apps",
+          "orderbook": 861750.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 1349250.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 6.0,
           "value_creation_this_month": 99000.0
         },
         {
           "customer": "Hitchhiker's Guide",
           "name": "Universe discovery",
+          "orderbook": 0.0,
+          "ebit_margin_this_month": 0.0,
           "value_creation": 31500.0,
-          "ebit_margin": 0.0,
           "fte_this_month": 0.0,
           "value_creation_this_month": 0.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.3636363636363636,
+        "ebit_margin_this_month": 0.3636363636363636,
         "fte_this_month": 6.954545454545455,
         "value_creation_this_month": 114750.0,
+        "orderbook": 877500.0,
         "value_creation": 1613250.0
       }
     },
@@ -123,16 +141,18 @@
         {
           "customer": "Galaxy Express 999",
           "name": "Galaxy Express 999",
+          "orderbook": 217500.0,
+          "ebit_margin_this_month": 0.36363636363636376,
           "value_creation": 675000.0,
-          "ebit_margin": 0.36363636363636376,
           "fte_this_month": 7.59090909090909,
           "value_creation_this_month": 125250.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.36363636363636376,
+        "ebit_margin_this_month": 0.36363636363636376,
         "fte_this_month": 7.59090909090909,
         "value_creation_this_month": 125250.0,
+        "orderbook": 217500.0,
         "value_creation": 675000.0
       }
     },
@@ -142,16 +162,18 @@
         {
           "customer": "Futurice",
           "name": "Sales",
+          "orderbook": 114000.0,
+          "ebit_margin_this_month": 0.36363636363636354,
           "value_creation": 498750.0,
-          "ebit_margin": 0.36363636363636354,
           "fte_this_month": 3.0909090909090913,
           "value_creation_this_month": 51000.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.36363636363636354,
+        "ebit_margin_this_month": 0.36363636363636354,
         "fte_this_month": 3.0909090909090913,
         "value_creation_this_month": 51000.0,
+        "orderbook": 114000.0,
         "value_creation": 498750.0
       }
     },
@@ -161,79 +183,89 @@
         {
           "customer": "Monsters Inc.",
           "name": "Apple Watch App",
+          "orderbook": 31500.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 31500.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 1.0,
           "value_creation_this_month": 16500.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Boo! App marketing",
+          "orderbook": 0.0,
+          "ebit_margin_this_month": 0.0,
           "value_creation": 13500.0,
-          "ebit_margin": 0.0,
           "fte_this_month": 0.0,
           "value_creation_this_month": 0.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Continuous development",
+          "orderbook": 30000.0,
+          "ebit_margin_this_month": 0.3636363636363636,
           "value_creation": 93000.0,
-          "ebit_margin": 0.3636363636363636,
           "fte_this_month": 1.4090909090909092,
           "value_creation_this_month": 23250.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Lean Monster Creation (LMC)",
+          "orderbook": 31500.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 165000.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 1.0,
           "value_creation_this_month": 16500.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Main Site development",
+          "orderbook": 78750.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 138750.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 2.0,
           "value_creation_this_month": 33000.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Monsters Mobile Apps",
+          "orderbook": 126000.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 156000.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 2.0,
           "value_creation_this_month": 33000.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Monsters Platformization",
+          "orderbook": 750750.0,
+          "ebit_margin_this_month": 0.3636363636363637,
           "value_creation": 1075500.0,
-          "ebit_margin": 0.3636363636363637,
           "fte_this_month": 13.227272727272727,
           "value_creation_this_month": 218250.0
         },
         {
           "customer": "Monsters Inc.",
           "name": "Scare Analytics",
+          "orderbook": 213750.0,
+          "ebit_margin_this_month": 0.36363636363636365,
           "value_creation": 363750.0,
-          "ebit_margin": 0.36363636363636365,
           "fte_this_month": 7.0,
           "value_creation_this_month": 115500.0
         }
       ],
       "summary": {
-        "ebit_margin": 0.36363636363636365,
+        "ebit_margin_this_month": 0.36363636363636365,
         "fte_this_month": 27.636363636363637,
         "value_creation_this_month": 456000.0,
+        "orderbook": 1262250.0,
         "value_creation": 2037000.0
       }
     }
   ],
   "summary": {
-    "ebit_margin": 0.36363636363636365,
-    "fte_this_month": 63.31818181818182,
+    "ebit_margin_this_month": 0.36363636363636354,
+    "fte_this_month": 63.31818181818183,
+    "orderbook": 3309000.0,
     "value_creation_this_month": 1044750.0,
     "value_creation": 7047750.0
   }
