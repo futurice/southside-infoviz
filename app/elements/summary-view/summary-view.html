@@ -57,7 +57,9 @@
     (function () {
       Polymer({
         format: function(value, precision) {
-          if (!Number(value)) return "-";
+          if (!Number(value)) {
+            return '-';
+          }
           return Number(value).toFixed(precision);
         }
       });
