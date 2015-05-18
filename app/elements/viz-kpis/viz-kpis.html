@@ -5,21 +5,21 @@
     <link rel="stylesheet" href="viz-kpis.css">
     <div class="kpi-numbers" layout horizontal>
       <div flex title="Estimated future revenue.">
-        <span class="number">{{ summary.orderbook / 1000 | toFixed(0) }} k&euro;</span>
+        <span class="number">{{ summary.orderbook / 1000 | format(0, 'k€') }}</span>
         <span class="description">Orderbook</span>
       </div>
       <div flex title="Estimated revenue for this month.">
-        <span class="number">{{ summary.value_creation_this_month / 1000 | toFixed(0) }} k&euro;</span>
+        <span class="number">{{ summary.value_creation_this_month / 1000 | format(0, 'k€') }}</span>
         <span class="description">Value Creation this month</span>
       </div>
       <div flex title="Estimated profit divided by revenue">
         <span class="number {{ { 'highlight-negative': summary.ebit_margin_this_month < 0.05,'highlight-positive': summary.ebit_margin_this_month >= 0.15 } | tokenList }}">
-          {{ summary.ebit_margin_this_month*100 | toFixed(1) }} %
+          {{ summary.ebit_margin_this_month*100 | format(1, '%') }}
         </span>
         <span class="description">EBIT (month)</span>
       </div>
       <div flex title="Number of persons working for tribe this month, converted to full time employees.">
-        <span class="number">{{ summary.fte_this_month | toFixed(1) }}</span>
+        <span class="number">{{ summary.fte_this_month | format(1) }}</span>
         <span class="description">FTE</span>
       </div>
     </div>
@@ -27,11 +27,15 @@
   <script>
     (function () {
       Polymer({
-        /**
-         * Filter for bringing numbers to a defined precision.
-         */
-        toFixed: function(value, precision) {
-          return Number(value).toFixed(precision);
+        format: function(value, precision, unit) {
+          if (!Number(value)) {
+            return '-';
+          }
+          var result = Number(value).toFixed(precision);
+          if (unit) {
+            result += ' '+unit;
+          }
+          return result;
         }
       });
     })();

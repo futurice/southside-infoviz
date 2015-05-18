@@ -34,16 +34,16 @@
         <h4 flex>{{ name || data.name }}</h4>
       </template>
       <div flex title="Estimated future revenue">
-        <span class="number">{{ data.orderbook / 1000 | format(1) }} k&euro;</span>
+        <span class="number">{{ data.orderbook / 1000 | format(1, 'k€') }}</span>
         <span class="description">Orderbook</span>
       </div>
       <div flex title="Estimated revenue for this month.">
-        <span class="number">{{ data.value_creation_this_month / 1000 | format(1) }} k&euro;</span>
+        <span class="number">{{ data.value_creation_this_month / 1000 | format(1, 'k€') }}</span>
         <span class="description">VC (month)</span>
       </div>
       <div flex title="Estimated profit divided by revenue">
         <span class="number {{ { 'highlight-negative': data.ebit_margin_this_month < 0.05,'highlight-positive': data.ebit_margin_this_month >= 0.15 } | tokenList }}">
-          {{ data.ebit_margin_this_month*100 | format(1) }} %
+          {{ data.ebit_margin_this_month*100 | format(1, '%') }}
         </span>
         <span class="description">EBIT (month)</span>
       </div>
@@ -56,11 +56,15 @@
   <script>
     (function () {
       Polymer({
-        format: function(value, precision) {
+        format: function(value, precision, unit) {
           if (!Number(value)) {
             return '-';
           }
-          return Number(value).toFixed(precision);
+          var result = Number(value).toFixed(precision);
+          if (unit) {
+            result += ' '+unit;
+          }
+          return result;
         }
       });
     })();
