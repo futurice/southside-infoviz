@@ -71,16 +71,21 @@
 
           var opts = {
             donut: true,
-            donutWidth: 10,
-            chartPadding: 65,
-            labelOffset: 25,
-            labelDirection: 'explode',
-            // labelInterpolationFnc: function(value) {
-            //   return value;
-            // }
+            donutWidth: 25,
+            chartPadding: 45,
+            labelOffset: 35,
+            labelDirection: 'explode'
           };
 
-          new Chartist.Pie(chartEl, data, opts);
+          var responsiveOpts = [
+            ['screen and (min-width: 768px)', {
+              donutWidth: 35,
+              chartPadding: 65,
+              labelOffset: 45,
+            }]
+          ];
+
+          new Chartist.Pie(chartEl, data, opts, responsiveOpts);
         }
       });
     })();
