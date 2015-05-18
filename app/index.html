@@ -33,7 +33,15 @@
 
     <core-ajax
       auto
-      url="{{ jsonUrl }}"
+      withCredentials
+      url="/config.json"
+      handleAs="json"
+      response="{{ config }}"></core-ajax>
+
+    <core-ajax
+      auto
+      withCredentials
+      url="{{ config.apiUrl }}"
       handleAs="json"
       response="{{ response }}"></core-ajax>
   </template>

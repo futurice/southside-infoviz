@@ -51,6 +51,7 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
+    '!app/config.json',
     '!app/test',
     'node_modules/apache-server-configs/dist/.htaccess'
   ], {
@@ -162,7 +163,7 @@ gulp.task('vulcanize', function () {
 });
 
 // Clean Output Directory
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', del.bind(null, ['.tmp']));
 
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles', 'elements'], function () {
