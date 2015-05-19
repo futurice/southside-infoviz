@@ -14,7 +14,7 @@
     <ul class="accounts-list">
       <template is="dom-repeat" items="{{customers}}">
         <li>
-          <summary-view name="{{item.name}}" data="{{item.summary}}" titlesize="large"></summary-view>
+          <summary-view name="{{item.name}}" data="{{item.summary}}" title-size="large"></summary-view>
           <project-collapse projects="{{item.projects}}"></project-collapse>
         </li>
       </template>

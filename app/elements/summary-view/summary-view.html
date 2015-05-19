@@ -30,7 +30,8 @@
 
   <template>
     <div class="layout horizontal">
-      <h4 class="flex title">{{name}}</h4>
+      <h2 hidden$="{{!isLarge}}" class="flex title">{{name}}</h4>
+      <h4 hidden$="{{isLarge}}" class="flex title">{{name}}</h4>
       <div class="flex" title="Estimated future revenue">
         <span class="number">{{orderbook}}</span>
         <span class="description">Orderbook</span>
@@ -76,6 +77,11 @@
         },
         fte: {
           computed: 'compFte(data)'
+        },
+        isLarge: {
+          type: Boolean,
+          value: false,
+          computed: 'compIsLarge(titleSize)'
         }
       },
       compOrderbook: function(summary) {
@@ -101,6 +107,9 @@
             summary.fte_this_month,
             1
           );
+      },
+      compIsLarge: function(titleSize) {
+        return titleSize === 'large';
       },
       format: function(value, precision, unit) {
         if (!Number(value)) {
