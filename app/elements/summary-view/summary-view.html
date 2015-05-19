@@ -1,99 +1,120 @@
-<!-- add <link rel="import" href="../iron-flex-layout/iron-flex-layout.html"> to top with other imports  -->
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<dom-module id="summary-view"> <!-- CONVERTED WIP -->
+<dom-module id="summary-view">
 
   <style>
-  </style> <!-- TODO Move style tags here from <template> if needed CONVERTED WIP -->
+    :host {
+      display: block;
+    }
+    .title {
+      font-weight: 100;
+      margin: 0;
+      font-size: 1.4em;
+    }
+    .title.large {
+      font-size: 2em;
+    }
+    .number,
+    .description {
+      text-align: center;
+      display: block;
+      padding: 0 0.5em;
+    }
+    .description {
+      font-size: 0.75em;
+    }
+    .highlight-positive {
+      color: rgb(50,158,65);
+    }
+    .highlight-negative {
+      color: rgb(255,82,64);
+    }
+  </style>
 
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-      h2, h4 {
-        font-weight: 100;
-        margin: 0;
-      }
-      .number,
-      .description {
-        text-align: center;
-        display: block;
-        padding: 0 0.5em;
-      }
-      .description {
-        font-size: 0.75em;
-      }
-      .highlight-positive {
-        color: rgb(50,158,65);
-      }
-      .highlight-negative {
-        color: rgb(255,82,64);
-      }
-    </style>
-    <div layout="" horizontal="">   <!-- class="layout horizontal"  // TODO Convert to class=  CONVERTED WIP  --> 
-      <template is="x-if" if="{{ titleSize == 'large' }}">
-      <!-- TODO fix if=,   CONVERTED WIP --> 
-        <h2 flex="">{{ name || data.name }}</h2>   <!-- class="flex{{"  // TODO Convert to class=  CONVERTED WIP  --> 
-      </template>
-      <template if="{{ titleSize != 'large' }}">
-      <!-- TODO fix if=,   CONVERTED WIP --> 
-        <h4 flex="">{{ name || data.name }}</h4>   <!-- class="flex{{"  // TODO Convert to class=  CONVERTED WIP  --> 
-      </template>
-      <div flex="" title="Estimated future revenue">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
-        <span class="number">{{ data.orderbook / 1000 | format(1, 'k€') }}</span>
+    <div class="layout horizontal">
+      <h4 class="flex title {{titleSize}}">[[_getName()]]</h4>
+      <div class="flex" title="Estimated future revenue">
+        <span class="number">{{computeValue('orderbook')}}</span>
         <span class="description">Orderbook</span>
       </div>
-      <div flex="" title="Estimated revenue for this month.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
-        <span class="number">{{ data.value_creation_this_month / 1000 | format(1, 'k€') }}</span>
+      <div class="flex" title="Estimated revenue for this month.">
+        <span class="number">{{computeValue('valuecreation')}}</span>
         <span class="description">VC (month)</span>
       </div>
-      <div flex="" title="Estimated profit divided by revenue">   <!-- class="flex "Estimated profit divided by revenue""  // TODO Convert to class=  CONVERTED WIP  --> 
-        <span class="number {{ { 'highlight-negative': data.ebit_margin_this_month < 0.05,'highlight-positive': data.ebit_margin_this_month >= 0.15 } | tokenList }}">
-          {{ data.ebit_margin_this_month*100 | format(1, '%') }}
-        </span>
+      <div class="flex" title="Estimated profit divided by revenue">
+        <span class="number">{{computeValue('ebit')}}</span>
         <span class="description">EBIT (month)</span>
       </div>
-      <div flex="" title="Number of persons working for project this month, converted to full time employees.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
-        <span class="number">{{ data.fte_this_month | format(1) }}</span>
+      <div class="flex" title="Number of persons working for project this month, converted to full time employees.">
+        <span class="number">{{computeValue('fte')}}</span>
         <span class="description">FTE</span>
       </div>
     </div>
   </template>
-  <script>
-    (function () {
-      Polymer({
-        is: 'summary-view', // CONVERTED WIP 
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'summary-view',
 
-        properties: {
-          //  TODO: add attributes="name data titleSize" to properites -- CONVERTED WIP
+      properties: {
+        name: {
+          type: String
+        },
+        data: {
+          type: Array
+        },
+        titleSize: {
+          type: String
         }
-        format: function(value, precision, unit) {
-          if (!Number(value)) {
-            return '-';
-          }
-          var result = Number(value).toFixed(precision);
-          if (unit) {
-            result += ' '+unit;
-          }
-          return result;
+      },
+      _getName: function() {
+        if (this.name) {
+          return this.name;
+        } else if (this.data.name) {
+          return this.data.name;
+        } else {
+          return '';
         }
-      });
-    })();
-  </script>
-</dom-module> <!-- CONVERTED -->
-
-
-<!-- CONVERSION NOTES TODO:
- Review code and look for: 
- - textContent binding from <div>First: {{first}}</div> TO First <span>{{first}}</span><br>
- - polymer-element default attributes such as tabindex="0" move to hostAttributes: {  tabindex: 0}
- - custom elements correct JSON quotes required, change from <my-element foo="{ 'title': 'Persuasion', 'author': 'Austen' }"> to </my-element> to <my-element foo="{ "title": "Persuasion", "author": "Austen" }"></my-element>
- - custom elements attribute use dash-case not camelCase, change from  <my-element fooBar= to <my-element foo-bar
- - Polymer( fix mixins use Behaviors after is: see  ,
- - Layout attributes replaced by layout classes <div layout horizontal center>` to `<div class="layout horizontal center">, 
- - Convert core- to iron- or paper- replacement elements at PolymerElements
- - fix indentation as need 
- - Cleanup Comments to reflect changes ,
- - see https://www.polymer-project.org/0.9/docs/migration.html
-   -->
+      },
+      computeValue: function(propName) {
+        switch (propName) {
+          case 'orderbook':
+            return this.format(
+                data.orderbook / 1000,
+                1, 'k€'
+              );
+          case 'valuecreation':
+            return this.format(
+                data.value_creation_this_month / 1000,
+                1, 'k€'
+              );
+          case 'ebit':
+            return this.format(
+                data.ebit_margin_this_month * 100,
+                1, '%'
+              );
+          case 'fte':
+            return this.format(
+                data.fte_this_month,
+                1
+              );
+          default:
+            return '';
+        }
+      },
+      format: function(value, precision, unit) {
+        if (!Number(value)) {
+          return '-';
+        }
+        var result = Number(value).toFixed(precision);
+        if (unit) {
+          result += ' '+unit;
+        }
+        return result;
+      }
+    });
+  })();
+</script>

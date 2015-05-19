@@ -1,117 +1,102 @@
-<!--   -->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<dom-module id="viz-financials"> <!-- CONVERTED WIP -->
-
-  <style>
-  </style> <!-- TODO Move style tags here from <template> if needed CONVERTED WIP -->
+<dom-module id="viz-financials">
+  <link rel="stylesheet" href="../../bower_components/chartist/dist/chartist.min.css">
+  <link rel="stylesheet" href="viz-financials.css">
 
   <template>
-    <link rel="stylesheet" href="../../bower_components/chartist/dist/chartist.min.css"> <!-- TODO Move line about <template>  CONVERTED WIP -->
-    <link rel="stylesheet" href="viz-financials.css"> <!-- TODO Move line about <template>  CONVERTED WIP -->
-
-    <iron-localstorage name="accounts-opened" value="{{ accountsOpened }}"></iron-localstorage>
+    <iron-localstorage name="accounts-opened" value="{{accountsOpened}}"></iron-localstorage>
 
     <div id="pieChart" class="ct-chart ct-perfect-fourth">
       <h2 class="chart-title">Value Creation this month</h2>
     </div>
 
     <ul class="accounts-list">
-      <template is="dom-repeat" items="{{data}}" ="{{="" c,="" i="" in="" customers="" }}"="">
-      <!-- TODO fix repeat, replace data, remove extra ="{{key in keys}}"   CONVERTED WIP --> 
+      <template is="dom-repeat" items="{{customers}}">
         <li>
-          <summary-view name="{{ c.name }}" data="{{ c.summary }}" titlesize="large"></summary-view>
-          <project-collapse projects="{{ c.projects }}"></project-collapse>
+          <summary-view name="{{item.name}}" data="{{item.summary}}" titlesize="large"></summary-view>
+          <!-- <project-collapse projects="{{item.projects}}"></project-collapse> -->
         </li>
       </template>
     </ul>
   </template>
-  <script src="../../bower_components/chartist/dist/chartist.js"></script>
-  <script>
-    /* jshint camelcase: false */
-    /* global Chartist */
-    (function () {
-      Polymer({
-        is: 'viz-financials', // CONVERTED WIP 
+</dom-module>
 
-        properties: {
-          //  TODO: add attributes="customers" to properites -- CONVERTED WIP
-        }
-        accountsOpened: [],
+<script src="../../bower_components/chartist/dist/chartist.js"></script>
+<script>
+  /* jshint camelcase: false */
+  /* global Chartist */
+  (function () {
+    Polymer({
+      is: 'viz-financials',
 
-        customersChanged: function(oldValue, newValue) {
-          if (newValue) {
-
-            // sort customers
-            var sorted = newValue.sort(function(a, b) {
-              return a.summary.value_creation_this_month < b.summary.value_creation_this_month;
-            });
-
-            // sort projects within customers
-            sorted.forEach(function(c) {
-              c.projects.sort(function(a, b) {
-                return a.value_creation_this_month < b.value_creation_this_month;
-              });
-            });
-
-            this.customers = sorted;
-            this.drawChart(sorted);
-          }
+      properties: {
+        customers: {
+          type: Array,
+          observer: 'customersChanged'
         },
-
-        /**
-         * Draws a graph using the Chartist library
-         */
-        drawChart: function(customers) {
-          var chartEl = this.$.pieChart;
-
-          var labels = customers.map(function(c) {
-            return c.name;
-          });
-
-          var series = customers.map(function(c) {
-            return c.summary.value_creation_this_month;
-          });
-
-          var data = {
-            labels: labels,
-            series: series
-          };
-
-          var opts = {
-            donut: true,
-            donutWidth: 25,
-            chartPadding: 45,
-            labelOffset: 35,
-            labelDirection: 'explode'
-          };
-
-          var responsiveOpts = [
-            ['screen and (min-width: 768px)', {
-              donutWidth: 35,
-              chartPadding: 65,
-              labelOffset: 45,
-            }]
-          ];
-
-          new Chartist.Pie(chartEl, data, opts, responsiveOpts);
+        accountsOpened: {
+          type: Array
         }
-      });
-    })();
-  </script>
-</dom-module> <!-- CONVERTED -->
+      },
 
+      customersChanged: function(newValue, oldValue) {
+        if (newValue) {
 
-<!-- CONVERSION NOTES TODO:
- Review code and look for: 
- - textContent binding from <div>First: {{first}}</div> TO First <span>{{first}}</span><br>
- - polymer-element default attributes such as tabindex="0" move to hostAttributes: {  tabindex: 0}
- - custom elements correct JSON quotes required, change from <my-element foo="{ 'title': 'Persuasion', 'author': 'Austen' }"> to </my-element> to <my-element foo="{ "title": "Persuasion", "author": "Austen" }"></my-element>
- - custom elements attribute use dash-case not camelCase, change from  <my-element fooBar= to <my-element foo-bar
- - Polymer( fix mixins use Behaviors after is: see  ,
- - Layout attributes replaced by layout classes <div layout horizontal center>` to `<div class="layout horizontal center">, 
- - Convert core- to iron- or paper- replacement elements at PolymerElements
- - fix indentation as need 
- - Cleanup Comments to reflect changes ,
- - see https://www.polymer-project.org/0.9/docs/migration.html
-   -->
+          // sort customers
+          var sorted = newValue.sort(function(a, b) {
+            return a.summary.value_creation_this_month < b.summary.value_creation_this_month;
+          });
+
+          // sort projects within customers
+          sorted.forEach(function(c) {
+            c.projects.sort(function(a, b) {
+              return a.value_creation_this_month < b.value_creation_this_month;
+            });
+          });
+
+          this.customers = sorted;
+          this.drawChart(sorted);
+        }
+      },
+
+      /**
+       * Draws a graph using the Chartist library
+       */
+      drawChart: function(customers) {
+        var chartEl = this.$.pieChart;
+
+        var labels = customers.map(function(c) {
+          return c.name;
+        });
+
+        var series = customers.map(function(c) {
+          return c.summary.value_creation_this_month;
+        });
+
+        var data = {
+          labels: labels,
+          series: series
+        };
+
+        var opts = {
+          donut: true,
+          donutWidth: 25,
+          chartPadding: 45,
+          labelOffset: 35,
+          labelDirection: 'explode'
+        };
+
+        var responsiveOpts = [
+          ['screen and (min-width: 768px)', {
+            donutWidth: 35,
+            chartPadding: 65,
+            labelOffset: 45,
+          }]
+        ];
+
+        new Chartist.Pie(chartEl, data, opts, responsiveOpts);
+      }
+    });
+  })();
+</script>
