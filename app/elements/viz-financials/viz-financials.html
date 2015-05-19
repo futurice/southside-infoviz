@@ -7,7 +7,7 @@
   <template>
     <iron-localstorage name="accounts-opened" value="{{accountsOpened}}"></iron-localstorage>
 
-    <div id="pieChart" class="ct-chart ct-perfect-fourth">
+    <div id="pie-chart" class="ct-chart ct-perfect-fourth">
       <h2 class="chart-title">Value Creation this month</h2>
     </div>
 
@@ -15,7 +15,7 @@
       <template is="dom-repeat" items="{{customers}}">
         <li>
           <summary-view name="{{item.name}}" data="{{item.summary}}" titlesize="large"></summary-view>
-          <!-- <project-collapse projects="{{item.projects}}"></project-collapse> -->
+          <project-collapse projects="{{item.projects}}"></project-collapse>
         </li>
       </template>
     </ul>
@@ -64,7 +64,7 @@
        * Draws a graph using the Chartist library
        */
       drawChart: function(customers) {
-        var chartEl = this.$.pieChart;
+        var chartEl = this.$['pie-chart'];
 
         var labels = customers.map(function(c) {
           return c.name;
