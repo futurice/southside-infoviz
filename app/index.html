@@ -27,7 +27,9 @@
     <!-- Main Content -->
     <img class="hero" src="images/hero.png" alt="">
     <section class="page">
-      <viz-kpis summary="{{ response.summary }}"></viz-kpis>
+      <viz-kpis
+        summary="{{ response.summary }}"
+        customers="{{ response.customers }}"></viz-kpis>
       <viz-financials customers="{{ response.customers }}"></viz-financials>
     </section>
 

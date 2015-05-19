@@ -1,6 +1,6 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="viz-kpis" attributes="summary">
+<polymer-element name="viz-kpis" attributes="summary customers">
   <template>
     <link rel="stylesheet" href="viz-kpis.css">
     <div class="kpi-numbers" layout horizontal>
@@ -22,10 +22,18 @@
         <span class="number">{{ summary.fte_this_month | format(1) }}</span>
         <span class="description">FTE</span>
       </div>
+      <div flex title="Number of persons on bench this month, converted to full time employees.">
+        <span class="number">{{ bench_percent | format(1, '%') }}</span>
+        <span class="description">Bench</span>
+      </div>
     </div>
   </template>
   <script>
     (function () {
+      var matchName = function(obj, name) {
+        return obj.name && obj.name.toLowerCase() === name;
+      };
+
       Polymer({
         format: function(value, precision, unit) {
           if (!Number(value)) {
@@ -36,6 +44,28 @@
             result += ' '+unit;
           }
           return result;
+        },
+        customersChanged: function(oldVal, newVal) {
+          var self = this;
+          if (!newVal) {
+            return;
+          }
+          newVal
+            .filter(function(item) {
+              return matchName(item, "futurice");
+            })
+            .forEach(function(customer) {
+              customer.projects
+                .filter(function(project) {
+                  return matchName(project, "bench");
+                })
+                .forEach(function(project) {
+                  var b = project.fte_this_month;
+                  self.bench_fte = b;
+                  self.bench_percent =
+                    100 * b / Number(self.summary.fte_this_month);
+                });
+            });
         }
       });
     })();

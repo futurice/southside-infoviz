@@ -167,6 +167,15 @@
           "value_creation": 498750.0,
           "fte_this_month": 3.0909090909090913,
           "value_creation_this_month": 51000.0
+        },
+        {
+          "customer": "Futurice",
+          "name": "Bench",
+          "orderbook": 114000.0,
+          "ebit_margin_this_month": 0.36363636363636354,
+          "value_creation": 498750.0,
+          "fte_this_month": 3.0909090909090913,
+          "value_creation_this_month": 51000.0
         }
       ],
       "summary": {
