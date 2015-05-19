@@ -38,14 +38,14 @@
       with-credentials
       url="/config.json"
       handle-as="json"
-      response="{{config}}"></iron-ajax>
+      last-response="{{config}}"></iron-ajax>
 
     <iron-ajax
       auto
       with-credentials
       url="{{config.apiUrl}}"
       handle-as="json"
-      response="{{response}}"></iron-ajax>
+      last-response="{{response}}"></iron-ajax>
   </template>
 
   <!-- build:js /scripts/app.js -->
