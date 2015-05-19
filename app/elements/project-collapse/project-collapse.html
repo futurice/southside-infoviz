@@ -13,7 +13,7 @@
     <iron-collapse id="collapse" opened="{{ opened }}">
       <template is="dom-repeat" items="{{projects}}">
         <div class="project">
-          <summary-view data="{{item}}"></summary-view>
+          <summary-view name="{{item.name}}" data="{{item}}" title-size="small"></summary-view>
         </div>
       </template>
     </iron-collapse>

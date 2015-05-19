@@ -10,10 +10,6 @@
     .title {
       font-weight: 100;
       margin: 0;
-      font-size: 1.4em;
-    }
-    .title.large {
-      font-size: 2em;
     }
     .number,
     .description {
@@ -34,7 +30,7 @@
 
   <template>
     <div class="layout horizontal">
-      <h4 class="flex title {{titleSize}}">{{name}}</h4>
+      <h4 class="flex title">{{name}}</h4>
       <div class="flex" title="Estimated future revenue">
         <span class="number">{{orderbook}}</span>
         <span class="description">Orderbook</span>
