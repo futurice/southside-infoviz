@@ -1,6 +1,11 @@
+<!-- add <link rel="import" href="../iron-flex-layout/iron-flex-layout.html"> to top with other imports  -->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="summary-view" attributes="name data titleSize">
+<dom-module id="summary-view"> <!-- CONVERTED WIP -->
+
+  <style>
+  </style> <!-- TODO Move style tags here from <template> if needed CONVERTED WIP -->
+
   <template>
     <style>
       :host {
@@ -26,28 +31,30 @@
         color: rgb(255,82,64);
       }
     </style>
-    <div layout horizontal>
-      <template if="{{ titleSize == 'large' }}">
-        <h2 flex>{{ name || data.name }}</h2>
+    <div layout="" horizontal="">   <!-- class="layout horizontal"  // TODO Convert to class=  CONVERTED WIP  --> 
+      <template is="x-if" if="{{ titleSize == 'large' }}">
+      <!-- TODO fix if=,   CONVERTED WIP --> 
+        <h2 flex="">{{ name || data.name }}</h2>   <!-- class="flex{{"  // TODO Convert to class=  CONVERTED WIP  --> 
       </template>
       <template if="{{ titleSize != 'large' }}">
-        <h4 flex>{{ name || data.name }}</h4>
+      <!-- TODO fix if=,   CONVERTED WIP --> 
+        <h4 flex="">{{ name || data.name }}</h4>   <!-- class="flex{{"  // TODO Convert to class=  CONVERTED WIP  --> 
       </template>
-      <div flex title="Estimated future revenue">
+      <div flex="" title="Estimated future revenue">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ data.orderbook / 1000 | format(1, 'k€') }}</span>
         <span class="description">Orderbook</span>
       </div>
-      <div flex title="Estimated revenue for this month.">
+      <div flex="" title="Estimated revenue for this month.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ data.value_creation_this_month / 1000 | format(1, 'k€') }}</span>
         <span class="description">VC (month)</span>
       </div>
-      <div flex title="Estimated profit divided by revenue">
+      <div flex="" title="Estimated profit divided by revenue">   <!-- class="flex "Estimated profit divided by revenue""  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number {{ { 'highlight-negative': data.ebit_margin_this_month < 0.05,'highlight-positive': data.ebit_margin_this_month >= 0.15 } | tokenList }}">
           {{ data.ebit_margin_this_month*100 | format(1, '%') }}
         </span>
         <span class="description">EBIT (month)</span>
       </div>
-      <div flex title="Number of persons working for project this month, converted to full time employees.">
+      <div flex="" title="Number of persons working for project this month, converted to full time employees.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ data.fte_this_month | format(1) }}</span>
         <span class="description">FTE</span>
       </div>
@@ -56,6 +63,11 @@
   <script>
     (function () {
       Polymer({
+        is: 'summary-view', // CONVERTED WIP 
+
+        properties: {
+          //  TODO: add attributes="name data titleSize" to properites -- CONVERTED WIP
+        }
         format: function(value, precision, unit) {
           if (!Number(value)) {
             return '-';
@@ -69,4 +81,19 @@
       });
     })();
   </script>
-</polymer-element>
+</dom-module> <!-- CONVERTED -->
+
+
+<!-- CONVERSION NOTES TODO:
+ Review code and look for: 
+ - textContent binding from <div>First: {{first}}</div> TO First <span>{{first}}</span><br>
+ - polymer-element default attributes such as tabindex="0" move to hostAttributes: {  tabindex: 0}
+ - custom elements correct JSON quotes required, change from <my-element foo="{ 'title': 'Persuasion', 'author': 'Austen' }"> to </my-element> to <my-element foo="{ "title": "Persuasion", "author": "Austen" }"></my-element>
+ - custom elements attribute use dash-case not camelCase, change from  <my-element fooBar= to <my-element foo-bar
+ - Polymer( fix mixins use Behaviors after is: see  ,
+ - Layout attributes replaced by layout classes <div layout horizontal center>` to `<div class="layout horizontal center">, 
+ - Convert core- to iron- or paper- replacement elements at PolymerElements
+ - fix indentation as need 
+ - Cleanup Comments to reflect changes ,
+ - see https://www.polymer-project.org/0.9/docs/migration.html
+   -->

@@ -1,28 +1,33 @@
+<!-- add <link rel="import" href="../iron-flex-layout/iron-flex-layout.html"> to top with other imports  -->
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="viz-kpis" attributes="summary customers">
+<dom-module id="viz-kpis"> <!-- CONVERTED WIP -->
+
+  <style>
+  </style> <!-- TODO Move style tags here from <template> if needed CONVERTED WIP -->
+
   <template>
-    <link rel="stylesheet" href="viz-kpis.css">
-    <div class="kpi-numbers" layout horizontal>
-      <div flex title="Estimated future revenue.">
+    <link rel="stylesheet" href="viz-kpis.css"> <!-- TODO Move line about <template>  CONVERTED WIP -->
+    <div class="kpi-numbers" layout="" horizontal="">   <!-- class="layout horizontal"  // TODO Convert to class=  CONVERTED WIP  --> 
+      <div flex="" title="Estimated future revenue.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ summary.orderbook / 1000 | format(0, 'k€') }}</span>
         <span class="description">Orderbook</span>
       </div>
-      <div flex title="Estimated revenue for this month.">
+      <div flex="" title="Estimated revenue for this month.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ summary.value_creation_this_month / 1000 | format(0, 'k€') }}</span>
         <span class="description">Value Creation this month</span>
       </div>
-      <div flex title="Estimated profit divided by revenue">
+      <div flex="" title="Estimated profit divided by revenue">   <!-- class="flex "Estimated profit divided by revenue""  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number {{ { 'highlight-negative': summary.ebit_margin_this_month < 0.05,'highlight-positive': summary.ebit_margin_this_month >= 0.15 } | tokenList }}">
           {{ summary.ebit_margin_this_month*100 | format(1, '%') }}
         </span>
         <span class="description">EBIT (month)</span>
       </div>
-      <div flex title="Number of persons working for tribe this month, converted to full time employees.">
+      <div flex="" title="Number of persons working for tribe this month, converted to full time employees.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ summary.fte_this_month | format(1) }}</span>
         <span class="description">FTE</span>
       </div>
-      <div flex title="Number of persons on bench this month, converted to full time employees.">
+      <div flex="" title="Number of persons on bench this month, converted to full time employees.">   <!-- class="flex"  // TODO Convert to class=  CONVERTED WIP  --> 
         <span class="number">{{ bench_percent | format(1, '%') }}</span>
         <span class="description">Bench</span>
       </div>
@@ -35,6 +40,11 @@
       };
 
       Polymer({
+        is: 'viz-kpis', // CONVERTED WIP 
+
+        properties: {
+          //  TODO: add attributes="summary customers" to properites -- CONVERTED WIP
+        }
         format: function(value, precision, unit) {
           if (!Number(value)) {
             return '-';
@@ -70,4 +80,19 @@
       });
     })();
   </script>
-</polymer-element>
+</dom-module> <!-- CONVERTED -->
+
+
+<!-- CONVERSION NOTES TODO:
+ Review code and look for: 
+ - textContent binding from <div>First: {{first}}</div> TO First <span>{{first}}</span><br>
+ - polymer-element default attributes such as tabindex="0" move to hostAttributes: {  tabindex: 0}
+ - custom elements correct JSON quotes required, change from <my-element foo="{ 'title': 'Persuasion', 'author': 'Austen' }"> to </my-element> to <my-element foo="{ "title": "Persuasion", "author": "Austen" }"></my-element>
+ - custom elements attribute use dash-case not camelCase, change from  <my-element fooBar= to <my-element foo-bar
+ - Polymer( fix mixins use Behaviors after is: see  ,
+ - Layout attributes replaced by layout classes <div layout horizontal center>` to `<div class="layout horizontal center">, 
+ - Convert core- to iron- or paper- replacement elements at PolymerElements
+ - fix indentation as need 
+ - Cleanup Comments to reflect changes ,
+ - see https://www.polymer-project.org/0.9/docs/migration.html
+   -->

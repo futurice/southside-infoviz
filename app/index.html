@@ -1,56 +1,61 @@
-<!doctype html>
-<html lang="">
+<!-- add <link rel="import" href="../iron-flex-layout/iron-flex-layout.html"> to top with other imports  -->
 
-<head>
+
+
+
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>South Side</title>
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
   <!-- build:css /styles/main.css -->
-  <link rel="stylesheet" href="/styles/main.css">
-  <!-- endbuild-->
+  <link rel="stylesheet" href="/styles/main.css"> <!-- TODO Move line about <template>  CONVERTED WIP -->
+  <!-- endbuild-->   <!-- class="endbuild--"  // TODO Convert to class=  CONVERTED WIP  --> 
 
   <!-- build:js /bower_components/webcomponentsjs/webcomponents.min.js -->
   <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
-  <!-- endbuild -->
+  <!-- endbuild -->   <!-- class="endbuild"  // TODO Convert to class=  CONVERTED WIP  --> 
 
   <!-- will be replaced with /elements/elements.vulcanized.html -->
   <link rel="import" href="/elements/elements.html">
-  <!-- endreplace-->
-</head>
+  <!-- endreplace-->   <!-- class="endreplace--"  // TODO Convert to class=  CONVERTED WIP  --> 
 
-<body unresolved fullbleed>
-  <template is="auto-binding" id="app">
+
+
+  <template is="dom-bind" id="app">
+     <!-- dom-bind CONVERTED WIP --> 
     <!-- Main Content -->
     <img class="hero" src="images/hero.png" alt="">
     <section class="page">
-      <viz-kpis
-        summary="{{ response.summary }}"
-        customers="{{ response.customers }}"></viz-kpis>
+      <viz-kpis summary="{{ response.summary }}" customers="{{ response.customers }}"></viz-kpis>
       <viz-financials customers="{{ response.customers }}"></viz-financials>
     </section>
 
-    <core-ajax
-      auto
-      withCredentials
-      url="/config.json"
-      handleAs="json"
-      response="{{ config }}"></core-ajax>
+    <iron-ajax auto="" withcredentials="" url="/config.json" handleas="json" response="{{ config }}"></iron-ajax>
 
-    <core-ajax
-      auto
-      withCredentials
-      url="{{ config.apiUrl }}"
-      handleAs="json"
-      response="{{ response }}"></core-ajax>
+    <iron-ajax auto="" withcredentials="" url="{{ config.apiUrl }}" handleas="json" response="{{ response }}"></iron-ajax>
   </template>
 
   <!-- build:js /scripts/app.js -->
   <script src="/scripts/app.js"></script>
-  <!-- endbuild-->
-</body>
+  <!-- endbuild-->   <!-- class="endbuild--"  // TODO Convert to class=  CONVERTED WIP  --> 
 
-</html>
+
+
+
+
+<!-- CONVERSION NOTES TODO:
+ Review code and look for: 
+ - textContent binding from <div>First: {{first}}</div> TO First <span>{{first}}</span><br>
+ - polymer-element default attributes such as tabindex="0" move to hostAttributes: {  tabindex: 0}
+ - custom elements correct JSON quotes required, change from <my-element foo="{ 'title': 'Persuasion', 'author': 'Austen' }"> to </my-element> to <my-element foo="{ "title": "Persuasion", "author": "Austen" }"></my-element>
+ - custom elements attribute use dash-case not camelCase, change from  <my-element fooBar= to <my-element foo-bar
+ - Polymer( fix mixins use Behaviors after is: see  ,
+ - Layout attributes replaced by layout classes <div layout horizontal center>` to `<div class="layout horizontal center">, 
+ - Convert core- to iron- or paper- replacement elements at PolymerElements
+ - fix indentation as need 
+ - Cleanup Comments to reflect changes ,
+ - see https://www.polymer-project.org/0.9/docs/migration.html
+   -->
