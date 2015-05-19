@@ -34,21 +34,21 @@
 
   <template>
     <div class="layout horizontal">
-      <h4 class="flex title {{titleSize}}">[[_getName()]]</h4>
+      <h4 class="flex title {{titleSize}}">{{name}}</h4>
       <div class="flex" title="Estimated future revenue">
-        <span class="number">{{computeValue('orderbook')}}</span>
+        <span class="number">{{orderbook}}</span>
         <span class="description">Orderbook</span>
       </div>
       <div class="flex" title="Estimated revenue for this month.">
-        <span class="number">{{computeValue('valuecreation')}}</span>
+        <span class="number">{{valuecreation}}</span>
         <span class="description">VC (month)</span>
       </div>
       <div class="flex" title="Estimated profit divided by revenue">
-        <span class="number">{{computeValue('ebit')}}</span>
+        <span class="number">{{ebit}}</span>
         <span class="description">EBIT (month)</span>
       </div>
       <div class="flex" title="Number of persons working for project this month, converted to full time employees.">
-        <span class="number">{{computeValue('fte')}}</span>
+        <span class="number">{{fte}}</span>
         <span class="description">FTE</span>
       </div>
     </div>
@@ -68,42 +68,43 @@
         },
         titleSize: {
           type: String
+        },
+        orderbook: {
+          computed: 'compOrderbook(data)'
+        },
+        valuecreation: {
+          computed: 'compValuecreation(data)'
+        },
+        ebit: {
+          computed: 'compEbit(data)'
+        },
+        fte: {
+          computed: 'compFte(data)'
         }
       },
-      _getName: function() {
-        if (this.name) {
-          return this.name;
-        } else if (this.data.name) {
-          return this.data.name;
-        } else {
-          return '';
-        }
+      compOrderbook: function(summary) {
+        return this.format(
+            summary.orderbook / 1000,
+            0, 'k€'
+          );
       },
-      computeValue: function(propName) {
-        switch (propName) {
-          case 'orderbook':
-            return this.format(
-                data.orderbook / 1000,
-                1, 'k€'
-              );
-          case 'valuecreation':
-            return this.format(
-                data.value_creation_this_month / 1000,
-                1, 'k€'
-              );
-          case 'ebit':
-            return this.format(
-                data.ebit_margin_this_month * 100,
-                1, '%'
-              );
-          case 'fte':
-            return this.format(
-                data.fte_this_month,
-                1
-              );
-          default:
-            return '';
-        }
+      compValuecreation: function(summary) {
+        return this.format(
+            summary.value_creation_this_month / 1000,
+            0, 'k€'
+          );
+      },
+      compEbit: function(summary) {
+        return this.format(
+            summary.ebit_margin_this_month * 100,
+            1, '%'
+          );
+      },
+      compFte: function(summary) {
+        return this.format(
+            summary.fte_this_month,
+            1
+          );
       },
       format: function(value, precision, unit) {
         if (!Number(value)) {
@@ -114,7 +115,7 @@
           result += ' '+unit;
         }
         return result;
-      }
+      },
     });
   })();
 </script>

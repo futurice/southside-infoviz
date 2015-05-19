@@ -6,25 +6,25 @@
   <link rel="stylesheet" href="viz-kpis.css">
 
   <template>
-    <div class="kpi-numbers" class="layout horizontal">
+    <div class="kpi-numbers layout horizontal">
       <div class="flex" title="Estimated future revenue.">
-        <span class="number">{{computeValue('orderbook')}}</span>
+        <span class="kpi-number">{{orderbook}}</span>
         <span class="description">Orderbook</span>
       </div>
       <div class="flex" title="Estimated revenue for this month.">
-        <span class="number">{{computeValue('valuecreation')}}</span>
+        <span class="kpi-number">{{valuecreation}}</span>
         <span class="description">Value Creation this month</span>
       </div>
       <div class="flex" title="Estimated profit divided by revenue">
-        <span class="number">{{computeValue('ebit')}}</span>
+        <span class="kpi-number">{{ebit}}</span>
         <span class="description">EBIT (month)</span>
       </div>
       <div class="flex" title="Number of persons working for tribe this month, converted to full time employees.">
-        <span class="number">{{computeValue('fte')}}</span>
+        <span class="kpi-number">{{fte}}</span>
         <span class="description">FTE</span>
       </div>
       <div class="flex" title="Number of persons on bench this month, converted to full time employees.">
-        <span class="number">{{format(bench_percent, 1, '%')}}</span>
+        <span class="kpi-number">{{bench}}</span>
         <span class="description">Bench</span>
       </div>
     </div>
@@ -43,35 +43,47 @@
             type: Object
           },
           customers: {
-            type: Array,
-            observer: 'customersChanged'
+            type: Array
+          },
+          orderbook: {
+            computed: 'compOrderbook(summary)'
+          },
+          valuecreation: {
+            computed: 'compValuecreation(summary)'
+          },
+          ebit: {
+            computed: 'compEbit(summary)'
+          },
+          fte: {
+            computed: 'compFte(summary)'
+          },
+          bench: {
+            computed: 'compBench(summary, customers)'
           }
         },
-        computeValue: function(propName) {
-          switch (propName) {
-            case 'orderbook':
-              return this.format(
-                  summary.orderbook / 1000,
-                  0, 'k€'
-                );
-            case 'valuecreation':
-              return this.format(
-                  summary.value_creation_this_month / 1000,
-                  0, 'k€'
-                );
-            case 'ebit':
-              return this.format(
-                  summary.ebit_margin_this_month * 100,
-                  1, '%'
-                );
-            case 'fte':
-              return this.format(
-                  summary.fte_this_month,
-                  1
-                );
-            default:
-              return '';
-          }
+        compOrderbook: function(summary) {
+          return this.format(
+              summary.orderbook / 1000,
+              0, 'k€'
+            );
+        },
+        compValuecreation: function(summary) {
+          return this.format(
+              summary.value_creation_this_month / 1000,
+              0, 'k€'
+            );
+        },
+        compEbit: function(summary) {
+          return this.format(
+              summary.ebit_margin_this_month * 100,
+              1, '%'
+            );
+        },
+        compFte: function(summary) {
+          return this.format(
+              summary.fte_this_month,
+              1
+            );
         },
         format: function(value, precision, unit) {
           if (!Number(value)) {
@@ -83,12 +95,12 @@
           }
           return result;
         },
-        customersChanged: function(newVal, oldVal) {
-          var self = this;
-          if (!newVal) {
+        compBench: function(summary, customers) {
+          if (!summary || !customers) {
             return;
           }
-          newVal
+          var benchPercent = '';
+          customers
             .filter(function(item) {
               return matchName(item, 'futurice');
             })
@@ -99,28 +111,13 @@
                 })
                 .forEach(function(project) {
                   var b = project.fte_this_month;
-                  self.bench_fte = b;
-                  self.bench_percent =
-                    100 * b / Number(self.summary.fte_this_month);
+                  benchPercent =
+                    100 * b / Number(summary.fte_this_month);
                 });
             });
+          return this.format(benchPercent, 1, '%');
         }
       });
     })();
   </script>
-</dom-module> <!-- CONVERTED -->
-
-
-<!-- CONVERSION NOTES TODO:
- Review code and look for: 
- - textContent binding from <div>First: {{first}}</div> TO First <span>{{first}}</span><br>
- - polymer-element default attributes such as tabindex="0" move to hostAttributes: {  tabindex: 0}
- - custom elements correct JSON quotes required, change from <my-element foo="{ 'title': 'Persuasion', 'author': 'Austen' }"> to </my-element> to <my-element foo="{ "title": "Persuasion", "author": "Austen" }"></my-element>
- - custom elements attribute use dash-case not camelCase, change from  <my-element fooBar= to <my-element foo-bar
- - Polymer( fix mixins use Behaviors after is: see  ,
- - Layout attributes replaced by layout classes <div layout horizontal center>` to `<div class="layout horizontal center">, 
- - Convert core- to iron- or paper- replacement elements at PolymerElements
- - fix indentation as need 
- - Cleanup Comments to reflect changes ,
- - see https://www.polymer-project.org/0.9/docs/migration.html
-   -->
+</dom-module>
