@@ -52,12 +52,12 @@
           }
           newVal
             .filter(function(item) {
-              return matchName(item, "futurice");
+              return matchName(item, 'futurice');
             })
             .forEach(function(customer) {
               customer.projects
                 .filter(function(project) {
-                  return matchName(project, "bench");
+                  return matchName(project, 'bench');
                 })
                 .forEach(function(project) {
                   var b = project.fte_this_month;
