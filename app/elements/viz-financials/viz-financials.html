@@ -27,8 +27,9 @@
   /* jshint camelcase: false */
   /* global Chartist */
   (function () {
+    var elementName = 'viz-financials';
     Polymer({
-      is: 'viz-financials',
+      is: elementName,
 
       properties: {
         customers: {
@@ -84,7 +85,14 @@
           donutWidth: 25,
           chartPadding: 45,
           labelOffset: 35,
-          labelDirection: 'explode'
+          labelDirection: 'explode',
+          classNames: {
+            chart:  elementName + ' ct-pie-chart',
+            series: elementName + ' ct-series',
+            slice:  elementName + ' ct-slice',
+            donut:  elementName + ' ct-donut',
+            label:  elementName + ' ct-label'
+          }
         };
 
         var responsiveOpts = [
@@ -96,6 +104,7 @@
         ];
 
         new Chartist.Pie(chartEl, data, opts, responsiveOpts);
+
       }
     });
   })();
