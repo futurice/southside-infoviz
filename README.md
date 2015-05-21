@@ -4,6 +4,8 @@ Web application that visualizes information about the Futurice South Side tribe.
 
 Made with [Polymer](https://www.polymer-project.org/).
 
+Live demo with mock data: [southside-infoviz.divshot.io](http://southside-infoviz.divshot.io/)
+
 
 ## Setting up
 
