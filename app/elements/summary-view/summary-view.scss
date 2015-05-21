@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+.title {
+  font-weight: 100;
+  margin: 0;
+}
+.number,
+.description {
+  text-align: center;
+  display: block;
+  padding: 0 0.5em;
+}
+.description {
+  font-size: 0.75em;
+}
+.highlight-positive {
+  color: rgb(50,158,65);
+}
+.highlight-negative {
+  color: rgb(255,82,64);
+}
